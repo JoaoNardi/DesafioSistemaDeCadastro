@@ -37,8 +37,8 @@ public class PastaUsuarios {
             } else {
                 for (File arquivo : listaDeUsuarios) { // para cada arquivo na lista de aquivos (dentro da pasta)
                     Scanner leitor1linha = new Scanner(arquivo); //cria um scanner pra ler os arquivos dentro da pasta
-                    String linha = leitor1linha.nextLine(); // le e armazena a primeira linha de cada txt
-                    String linhaLimpa = linha.replace(",", "").replace("[", "• "); // embeleza o string
+                    String [] linha = leitor1linha.nextLine().split(","); // le e armazena o primeio indice de cada txt
+                    String linhaLimpa = linha[0].replace(",", "").replace("[", "• "); // embeleza o string
                     System.out.println(linhaLimpa); // imprime o string
                     leitor1linha.close();
                 }
@@ -56,8 +56,8 @@ public class PastaUsuarios {
         } else {
             for (File arquivo : listaDeUsuarios) { // para cada arquivo na lista de aquivos (dentro da pasta)
                 Scanner leitor1linha = new Scanner(arquivo); //cria um scanner pra ler os arquivos dentro da pasta
-                String linha = leitor1linha.nextLine(); // le e armazena a primeira linha de cada txt
-                String linhaLimpa = linha.replace(",", "").replace("[", ""); // embeleza o string
+                String [] linha = leitor1linha.nextLine().split(","); // le e armazena o primeio indice de cada txt
+                String linhaLimpa = linha[0].replace(",", "").replace("[", ""); // embeleza o string
                 listaBusca.add(linhaLimpa);
 
             }

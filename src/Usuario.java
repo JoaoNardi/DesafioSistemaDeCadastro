@@ -28,7 +28,8 @@ public class Usuario {
 
                 for (int i = 0; i < pergunta.linhasTxt.size(); i++) { //para cada linha
                     System.out.println(pergunta.linhasTxt.get(i)); // pergunta ao usuario
-                    listaDeRespostas.add(leitorResposta.nextLine()); // captura o input e colocar na lista de repostas
+                    String resposta = leitorResposta.nextLine();
+                    listaDeRespostas.add(resposta); // captura o input e colocar na lista de repostas
                 }
             }
             this.numero = new PastaUsuarios().contaUsuarios() + 1; // gera um numero para o usuario com base na quantidade de usuarios que existem
