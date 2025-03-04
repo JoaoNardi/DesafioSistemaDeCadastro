@@ -8,7 +8,7 @@ import java.util.stream.Stream;
 public class PastaUsuarios {
     protected int numeroDeUsuarios;
     protected String diretorioPastaUsers = "C:/Users/João V Nardi/Desktop/Joao/java/DesafioSistemaDeCadastro2/usuarios/";
-
+    List<String> listaBusca = new ArrayList<>();
     File pastaUsers = new File(diretorioPastaUsers); // pasta users
     int contador = 0;
     File[] listaDeUsuarios = pastaUsers.listFiles();
@@ -47,30 +47,38 @@ public class PastaUsuarios {
             System.out.println(e.getMessage());
         }
     }
-    public void buscaUsuario() throws FileNotFoundException, IllegalArgumentException {
-        List<String> listaBusca = new ArrayList<>();
-        Scanner busca = new Scanner(System.in);
 
-        if (!pastaUsers.exists()) {
-            throw new FileNotFoundException("Pasta usuarios nao encontrada");
-        } else {
-            for (File arquivo : listaDeUsuarios) { // para cada arquivo na lista de aquivos (dentro da pasta)
-                Scanner leitor1linha = new Scanner(arquivo); //cria um scanner pra ler os arquivos dentro da pasta
-                String [] linha = leitor1linha.nextLine().split(","); // le e armazena o primeio indice de cada txt
-                String linhaLimpa = linha[0].replace(",", "").replace("[", ""); // embeleza o string
-                listaBusca.add(linhaLimpa);
+    public List busca(int indice) throws FileNotFoundException {
+        try {
+            if (!pastaUsers.exists()) {
+                throw new FileNotFoundException("Pasta usuarios nao encontrada");
+            } else {
+                for (File arquivo : listaDeUsuarios) { // para cada arquivo na lista de aquivos (dentro da pasta)
+                    Scanner leitor1linha = new Scanner(arquivo); //cria um scanner pra ler os arquivos dentro da pasta
+                    String[] linha = leitor1linha.nextLine().split(","); // le e armazena o primeio indice de cada txt
+                    String linhaLimpa = linha[indice].replace(",", "").replace("[", ""); // embeleza o string
+                    listaBusca.add(linhaLimpa);
 
+                }
             }
+            return listaBusca;
+        } finally {
 
+        }
+    }
+
+    public void buscaUsuario() throws FileNotFoundException, IllegalArgumentException {
+        busca(0);
+        Scanner busca = new Scanner(System.in);
             String[] nomes = listaBusca.toArray(new String[0]); // converte lista para array de string
             String buscado = busca.nextLine(); // input da busca
-            if (buscado.length() <= 2 || buscado.contains("  ")) { // possiveis inputs invalidos
-                throw new IllegalArgumentException("Erro: caracteres invalidos");
+            if (buscado.length() <= 2 || buscado.isBlank()) { // possiveis inputs invalidos
+                throw new IllegalArgumentException("Erro: Dados para busca invalidos!");
             } else {
                 Stream.of(nomes).map(String::toLowerCase).sorted().filter(f -> f.contains(buscado)).forEach(System.out::println); // filtra a busca
             }
         }
-    }
+
     public int getNumeroDeUsuarios() {
         return numeroDeUsuarios;
     }
