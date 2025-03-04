@@ -38,8 +38,13 @@ public class Principal {
                     System.out.println("Pergunta adicionada com sucesso!");
                     break;
                 case 4:
-                    new ArquivoPerguntas().deletaPergunta();
-                    new ArquivoPerguntas().refresh();
+                    try {
+                        new ArquivoPerguntas().deletaPergunta();
+                        new ArquivoPerguntas().refresh();
+                        System.out.println("Pergunta deletada com sucesso!");
+                    }catch (IllegalArgumentException e) {
+                        System.out.println(e.getMessage());
+                    }
                     break;
                 case 5:
                     System.out.println("Digite o nome a ser buscado: ");

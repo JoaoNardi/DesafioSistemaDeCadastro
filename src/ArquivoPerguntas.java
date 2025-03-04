@@ -51,22 +51,28 @@ public class ArquivoPerguntas {
     }
 
     public void deletaPergunta() throws IOException {
-        converteTxtParaString();
-        System.out.println("***************************");
-        System.out.println("Deseja apagar qual pergunta?");
+            converteTxtParaString();
+            System.out.println("***************************");
+            System.out.println("Deseja apagar qual pergunta?");
 
-        for (int i = 4; i < linhasTxt.size(); i++) {
-            System.out.println(linhasTxt.get(i).toString().replace("[","").replace("]","").replace(", ","").replace("\n", "")); //arruma esteticamente
-            // a lista;
-        }
-        System.out.println("***************************");
-        int perguntaDeletavel = leitor.nextInt();
-        linhasTxt.remove(perguntaDeletavel-1);
+            for (int i = 4; i < linhasTxt.size(); i++) {
+                System.out.println(linhasTxt.get(i).toString()
+                        .replace("[", "")
+                        .replace("]", "")
+                        .replace(", ", "")
+                        .replace("\n", "")); //arruma esteticamente a lista;
+            }
+            System.out.println("***************************");
+            int perguntaDeletavel = leitor.nextInt();
+            if (perguntaDeletavel <= 4) {
+                throw new IllegalArgumentException("                Atenção!!!" + "\n" + "Não é possivel deletar as perguntas padrão");
+            } else
+                linhasTxt.remove(perguntaDeletavel - 1);
 
-        converteTxtParaString();
-        refresh();
-    }
+            converteTxtParaString();
+            refresh();
 
+}
     public List<String> getLinhasTxt() {
         return linhasTxt;
     }
