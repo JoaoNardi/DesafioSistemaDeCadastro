@@ -20,7 +20,7 @@ public class Principal {
                     try {
                         new Usuario().criaUsuario();
 
-                    } catch (FileNotFoundException | InputMismatchException e) {
+                    } catch (FileNotFoundException | InputMismatchException | NumberFormatException e) {
                         System.out.println(e.getMessage());
                     }
                     break;
