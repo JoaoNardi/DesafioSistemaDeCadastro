@@ -11,7 +11,7 @@ public class PastaUsuarios {
     List<String> listaBusca = new ArrayList<>();
     File pastaUsers = new File(diretorioPastaUsers); // pasta users
     int contador = 0;
-    File[] listaDeUsuarios = pastaUsers.listFiles();
+    File[] arrayDeUsuarios = pastaUsers.listFiles();
 
 
     public PastaUsuarios() throws FileNotFoundException {
@@ -19,8 +19,7 @@ public class PastaUsuarios {
 
 
     public int contaUsuarios() {
-
-        for (File file : listaDeUsuarios) {
+        for (File file : arrayDeUsuarios) {
             if (file.isFile()) {
                 contador++;
             }
@@ -30,30 +29,34 @@ public class PastaUsuarios {
     }
 
     public void listarUsuarios() { //metodo para listar usuarios
-
-        try {
-            if (!pastaUsers.exists()) {
-                throw new FileNotFoundException("Pasta usuarios nao encontrada");
-            } else {
-                for (File arquivo : listaDeUsuarios) { // para cada arquivo na lista de aquivos (dentro da pasta)
+        if (arrayDeUsuarios == null || pastaUsers.listFiles().length == 0){
+            throw new IllegalArgumentException("Erro: Nenhum usuario cadastrado!");
+        } else {
+            for (File arquivo : arrayDeUsuarios) { // para cada arquivo na lista de aquivos (dentro da pasta)
+                if (!arquivo.exists() || !arquivo.isFile()) {
+                    throw new IllegalArgumentException("Erro ao ler arquivo");
+                }
+                try {
                     Scanner leitor1linha = new Scanner(arquivo); //cria um scanner pra ler os arquivos dentro da pasta
-                    String [] linha = leitor1linha.nextLine().split(","); // le e armazena o primeio indice de cada txt
-                    String linhaLimpa = linha[0].replace(",", "").replace("[", "• "); // embeleza o string
-                    System.out.println(linhaLimpa); // imprime o string
-                    leitor1linha.close();
+                    if (leitor1linha.hasNextLine()) {
+                        String[] linha = leitor1linha.nextLine().split(","); // le e armazena o primeio indice de cada txt
+                        String linhaLimpa = linha[0].replace(",", "").replace("[", "• "); // embeleza o string
+                        System.out.println(linhaLimpa); // imprime o string
+                        leitor1linha.close();
+
+                    }
+                } catch (FileNotFoundException e) {
+                    System.out.println(e.getMessage());
                 }
             }
-        } catch (FileNotFoundException e) {
-            System.out.println(e.getMessage());
         }
     }
-
-    public List busca(int indice) throws FileNotFoundException {
+    public List busca(int indice) {
         try {
             if (!pastaUsers.exists()) {
                 throw new FileNotFoundException("Pasta usuarios nao encontrada");
             } else {
-                for (File arquivo : listaDeUsuarios) { // para cada arquivo na lista de aquivos (dentro da pasta)
+                for (File arquivo : arrayDeUsuarios) { // para cada arquivo na lista de aquivos (dentro da pasta)
                     Scanner leitor1linha = new Scanner(arquivo); //cria um scanner pra ler os arquivos dentro da pasta
                     String[] linha = leitor1linha.nextLine().split(","); // le e armazena o primeio indice de cada txt
                     String linhaLimpa = linha[indice].replace(",", "").replace("[", ""); // embeleza o string
@@ -61,12 +64,12 @@ public class PastaUsuarios {
 
                 }
             }
-            return listaBusca;
-        } finally {
 
+        } catch (FileNotFoundException e) {
+            System.out.println(e.getMessage());
         }
+        return listaBusca;
     }
-
     public void buscaUsuario() throws FileNotFoundException, IllegalArgumentException {
         busca(0);
         Scanner busca = new Scanner(System.in);

@@ -19,7 +19,6 @@ public class Usuario {
     }
 
     public void capturaInput() throws FileNotFoundException {
-
         while (pergunta.leitorTxt.hasNextLine()) { // enquanto tiver linhas nao lidas
             pergunta.converteTxtParaString(); // aciona metodo para jogar as linhas do txt na lista
 
@@ -34,7 +33,6 @@ public class Usuario {
         this.id = numero + "-" + nome.replace(" ", "").toUpperCase(); // gera o id (nome do txt do usuario)
 
         DecimalFormat formatoMetros = new DecimalFormat("0,00"); //define um formato para metros
-        try {
             // separa o valor numerico do restante e substitui "," por "."
             String[] partes = listaDeRespostas.get(3).replace(",", "").replace(".", "").split(" ");
             if (!Character.isDigit(partes[0].charAt(0))) { // verifica se a resposta possui um número
@@ -44,13 +42,9 @@ public class Usuario {
                 String alturaAjustada = formatoMetros.format(alturaConvertida); //transforma a altura em string no formato desejado
                 listaDeRespostas.set(3, alturaAjustada); // subtitui a altura antiga por uma altura formatada nova
             }
-        } finally {
-
-        }
     }
 
     public void criaUsuario() throws IOException { // metodo para criar usuario
-        try {
             capturaInput();
             List<String> buscaEmail = new PastaUsuarios().busca(1);
             String email = listaDeRespostas.get(1).trim();
@@ -75,9 +69,6 @@ public class Usuario {
                 //
                 br.write(listaDeRespostas.toString()); //escreve a lista de reposta no txt
                 br.close();
-            }
-            }finally{
-
             }
         }
     }

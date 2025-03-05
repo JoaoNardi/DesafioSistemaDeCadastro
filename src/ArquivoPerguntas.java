@@ -16,9 +16,11 @@ public class ArquivoPerguntas {
 
     public void refresh() throws IOException {
         converteTxtParaString();
+        //bloco para escrever num txt existente
         OutputStream os = new FileOutputStream(caminhoPerguntas);
         Writer wr = new OutputStreamWriter(os);
         BufferedWriter br = new BufferedWriter(wr);
+        //
         while (leitorTxt.hasNextLine()) { //enquanto tiver linhas para ler
             String[] partes = leitorTxt.nextLine().split(" - ");
             var p = new Pergunta(linhasTxt.size() + 1, partes[1].trim());

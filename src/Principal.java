@@ -9,12 +9,13 @@ public class Principal {
         new ArquivoPerguntas().refresh();
         System.out.println("Seja Bem vindo!");
         while (true) {
-            System.out.println("" +
-                    "1 - Cadastrar o usuário\n" +
-                    "2 - Listar todos usuários cadastrados\n" +
-                    "3 - Cadastrar nova pergunta no formulário\n" +
-                    "4 - Deletar pergunta do formulário\n" +
-                    "5 - Pesquisar usuário por nome ou idade ou email");
+            System.out.println(
+                    """
+                            1 - Cadastrar o usuário
+                            2 - Listar todos usuários cadastrados
+                            3 - Cadastrar nova pergunta no formulário
+                            4 - Deletar pergunta do formulário
+                            5 - Pesquisar usuário por nome ou idade ou email""");
             switch (leitura.nextInt()) {
                 case 1:
                     try {
@@ -25,11 +26,14 @@ public class Principal {
                     }
                     break;
                 case 2:
-
-                    System.out.println("*************************");
-                    System.out.println("Usuarios cadatrados:");
-                    new PastaUsuarios().listarUsuarios();
-                    System.out.println("*************************");
+                    try {
+                        System.out.println("*************************");
+                        System.out.println("Usuarios cadatrados:");
+                        new PastaUsuarios().listarUsuarios();
+                        System.out.println("*************************");
+                    }catch (FileNotFoundException | IllegalArgumentException | ArrayIndexOutOfBoundsException e){
+                        System.out.println(e.getMessage());
+                    }
                     break;
                 case 3:
                     System.out.println("Digite a pergunta que deseja adicionar:");
