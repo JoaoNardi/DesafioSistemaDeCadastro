@@ -33,43 +33,42 @@ public class Usuario {
         this.id = numero + "-" + nome.replace(" ", "").toUpperCase(); // gera o id (nome do txt do usuario)
 
         DecimalFormat formatoMetros = new DecimalFormat("0,00"); //define um formato para metros
-            // separa o valor numerico do restante e substitui "," por "."
-            String[] partes = listaDeRespostas.get(3).replace(",", "").replace(".", "").split(" ");
-            if (!Character.isDigit(partes[0].charAt(0))) { // verifica se a resposta possui um número
-                throw new NumberFormatException("Erro: altura informada invalida! (apenas numeros devem ser inseridos)");
-            } else {
-                double alturaConvertida = Double.parseDouble(partes[0]); // converte a altura em double
-                String alturaAjustada = formatoMetros.format(alturaConvertida); //transforma a altura em string no formato desejado
-                listaDeRespostas.set(3, alturaAjustada); // subtitui a altura antiga por uma altura formatada nova
-            }
-    }
-
-    public void criaUsuario() throws IOException { // metodo para criar usuario
-            capturaInput();
-            List<String> buscaEmail = new PastaUsuarios().busca(1);
-            String email = listaDeRespostas.get(1).trim();
-            if (listaDeRespostas.get(0).length() < 10) { // se o nome tiver menos de 10 caracteres
-                throw new InputMismatchException("Erro: NOME COMPLETO inválido! (deve conter ao menos 10 caracteres)");
-            } else {
-                if (!email.contains("@")) { // se o email nao tiver o @
-                    throw new InputMismatchException("Erro: EMAIL inválido! (deve conter @)");
-                } else if ((Integer.parseInt(listaDeRespostas.get(2)) < 18)) { // se o input de idade for menor que 18 anos
-                    throw new IllegalArgumentException("Erro: Usuario deve ter mais de 18 anos"); // lanca a exe
-                } else if (buscaEmail.contains(" " + email)) {
-                    throw new IllegalArgumentException("Erro: O email informado ja é cadastrado!");
-                } else {
-
-
-                }
-                respostasTxt = new File("C:/Users/João V Nardi/Desktop/Joao/java/DesafioSistemaDeCadastro2/usuarios", id + ".txt");
-                //bloco para escrever no txt
-                OutputStream os = new FileOutputStream(respostasTxt);
-                Writer wr = new OutputStreamWriter(os);
-                BufferedWriter br = new BufferedWriter(wr);
-                //
-                br.write(listaDeRespostas.toString()); //escreve a lista de reposta no txt
-                br.close();
-            }
+        // separa o valor numerico do restante e substitui "," por "."
+        String[] partes = listaDeRespostas.get(3).replace(",", "").replace(".", "").split(" ");
+        if (!Character.isDigit(partes[0].charAt(0))) { // verifica se a resposta possui um número
+            throw new NumberFormatException("Erro: altura informada invalida! (apenas numeros devem ser inseridos)");
+        } else {
+            double alturaConvertida = Double.parseDouble(partes[0]); // converte a altura em double
+            String alturaAjustada = formatoMetros.format(alturaConvertida); //transforma a altura em string no formato desejado
+            listaDeRespostas.set(3, alturaAjustada); // subtitui a altura antiga por uma altura formatada nova
         }
     }
 
+    public void criaUsuario() throws IOException { // metodo para criar usuario
+        capturaInput();
+        List<String> busca = new PastaUsuarios().busca(); // puxa a lista de busca da classe pasta usuarios
+        String[] buscaEmail = busca.toArray(new String[0]); // lista vira string array local
+
+        String email = listaDeRespostas.get(1); // define o que é o email
+        if (listaDeRespostas.get(0).length() < 10) { // se o nome tiver menos de 10 caracteres
+            throw new InputMismatchException("Erro: NOME COMPLETO inválido! (deve conter ao menos 10 caracteres)");
+        } else {
+            if (!email.contains("@")) { // se o email nao tiver o @
+                throw new InputMismatchException("Erro: EMAIL inválido! (deve conter @)");
+            } else if ((Integer.parseInt(listaDeRespostas.get(2)) < 18)) { // se o input de idade for menor que 18 anos
+                throw new IllegalArgumentException("Erro: Usuario deve ter mais de 18 anos"); // lanca a exe
+            } else if (buscaEmail.toString().contains(" " + email.trim()) | buscaEmail.toString().contains(email)) { // verifca se o email ja existe
+                throw new IllegalArgumentException("Erro: O email informado ja é cadastrado!");
+            } else
+
+                respostasTxt = new File("C:/Users/João V Nardi/Desktop/Joao/java/DesafioSistemaDeCadastro2/usuarios", id + ".txt");
+            //bloco para escrever no txt
+            OutputStream os = new FileOutputStream(respostasTxt);
+            Writer wr = new OutputStreamWriter(os);
+            BufferedWriter br = new BufferedWriter(wr);
+            //
+            br.write(listaDeRespostas.toString()); //escreve a lista de reposta no txt
+            br.close();
+        }
+    }
+}

@@ -8,14 +8,16 @@ public class Principal {
         Scanner leitura = new Scanner(System.in);
         new ArquivoPerguntas().refresh();
         System.out.println("Seja Bem vindo!");
-        while (true) {
+        int saida = 0;
+        while (saida ==0) {
             System.out.println(
                     """
                             1 - Cadastrar o usuário
                             2 - Listar todos usuários cadastrados
                             3 - Cadastrar nova pergunta no formulário
                             4 - Deletar pergunta do formulário
-                            5 - Pesquisar usuário por nome ou idade ou email""");
+                            5 - Pesquisar usuário por nome ou idade ou email
+                            6 - Encerrar aplicação""");
             switch (leitura.nextInt()) {
                 case 1:
                     try {
@@ -51,13 +53,19 @@ public class Principal {
                     }
                     break;
                 case 5:
-                    System.out.println("Digite o nome a ser buscado: ");
-                    System.out.println("(a busca deve conter pelo menos 3 caracteres)");
+                    System.out.println("Digite o nome, email ou idade do usuario a ser buscado: ");
+                    System.out.println("(a busca deve conter pelo menos 2 caracteres)");
                     try {
                         new PastaUsuarios().buscaUsuario();
-                    }catch (FileNotFoundException | IllegalArgumentException e){
+                    } catch (FileNotFoundException | IllegalArgumentException | InputMismatchException e) {
                         System.out.println(e.getMessage());
                     }
+                    break;
+                case 6:
+                    System.out.println("Obrigado por usar a nossa aplicação");
+                    System.out.println("Até mais!");
+                    saida = 1;
+
                     break;
 
                 default:
