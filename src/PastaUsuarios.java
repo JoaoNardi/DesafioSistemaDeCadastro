@@ -19,7 +19,10 @@ public class PastaUsuarios {
     }
 
 
-    public int contaUsuarios() {
+    public int contaUsuarios() throws FileNotFoundException {
+        if (!pastaUsers.exists()){
+            throw new FileNotFoundException("Pasta de usuario nao encontrada!");
+        }
         for (File arquivo : arrayDeUsuarios) { // para cada arquivo no array
             if (arquivo.isFile()) {
                 contador++; // para cada arquivo contador cresce
