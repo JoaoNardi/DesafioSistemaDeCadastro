@@ -54,7 +54,8 @@ public class ArquivoPerguntas {
 
     public void deletaPergunta() throws IOException {
             converteTxtParaString();
-            System.out.println("***************************");
+            if (linhasTxt.size() == 4){throw new IllegalArgumentException("Erro: Nenhuma pergunta cadastrada!");}
+            System.out.println("-------------------------");
             System.out.println("Deseja apagar qual pergunta?");
 
             for (int i = 4; i < linhasTxt.size(); i++) {
@@ -64,10 +65,10 @@ public class ArquivoPerguntas {
                         .replace(", ", "")
                         .replace("\n", "")); //arruma esteticamente a lista;
             }
-            System.out.println("***************************");
+            System.out.println("-------------------------");
             int perguntaDeletavel = leitor.nextInt();
-            if (perguntaDeletavel <= 4) {
-                throw new IllegalArgumentException("                Atenção!!!" + "\n" + "Não é possivel deletar as perguntas padrão");
+        if (perguntaDeletavel > linhasTxt.size()) {throw new IndexOutOfBoundsException("Erro: Pergunta ("+  perguntaDeletavel + ") não " + "existe");}
+            if (perguntaDeletavel <= 4) {throw new IllegalArgumentException("                Atenção!!!" + "\n" + "Não é possivel deletar as perguntas padrão");
             } else
                 linhasTxt.remove(perguntaDeletavel - 1);
 
