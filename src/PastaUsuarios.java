@@ -62,7 +62,7 @@ public class PastaUsuarios {
             } else {
                 for (File arquivo : arrayDeUsuarios) { // para cada arquivo na lista de aquivos (dentro da pasta)
                     Scanner leitor1linha = new Scanner(arquivo); //cria um scanner pra ler os arquivos dentro da pasta
-                    String[] linha = leitor1linha.nextLine().split(","); // le e armazena os indices de cada txt
+                    String[] linha = leitor1linha.nextLine().toLowerCase().split(","); // le e armazena os indices de cada txt
 
                     String linhaLimpa = linha[0].replace("[", "*NOME: "); // embeleza o string
                     linhaLimpa += "     *EMAIL: " + linha[1];
@@ -81,7 +81,7 @@ public class PastaUsuarios {
         Scanner busca = new Scanner(System.in);
             String[] nomes = listaBusca.toArray(new String[0]); // converte lista para array de string
             String buscado = busca.nextLine(); // input da busca
-        if (!listaBusca.contains(buscado)){
+        if (Stream.of(nomes).noneMatch(f -> f.contains(buscado.trim()))){
             throw new InputMismatchException("Nenhum usuario encontrado.");
         }
             if (buscado.length() < 2 || buscado.isBlank()) { // possiveis inputs invalidos
@@ -99,5 +99,4 @@ public class PastaUsuarios {
     public String getDiretorioPastaUsers() {
         return diretorioPastaUsers;
     }
-
 }
