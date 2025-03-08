@@ -12,10 +12,15 @@
 - `3 - Cadastrar nova pergunta no formulário`: Adiciona uma pergunta, reescrevendo o arquivo onde está guardado o formulário.
 - `4 - Deletar pergunta do formulário`: Deleta a pergunta selecionada (apenas as perguntas criadas na funcionalidade 3 podem ser apagadas).
 - `5 - Pesquisar usuário por nome, idade ou e-mail`: A busca será feita nos arquivos cadastrados, e os resultados mais aproximados obtidos serão exibidos em ordem alfabética.
-- `6 - Encerrar aplicação`: Encerra a execução do programa.
+- `6 - Encerrar aplicação`: Encerra a execução do programa.<br>
   <br>
+  Obs: o repositório possui um usuário teste cadastrado pronto para uso.
 </p>
+<br>
+<h3> ▶️ Utilizando</h3>
+<p> Para usar a aplicação bastar abrir o repositório em qualquer IDE e iniciar através da função run ou similar. </p>
 
+<br>
 <h3>📚 Sobre</h3>
 <p> 
 Projeto proposto pelo @devmagro em seu guia de estudo de Java. <br>
