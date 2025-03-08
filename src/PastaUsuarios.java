@@ -8,7 +8,7 @@ import java.util.stream.Stream;
 
 public class PastaUsuarios {
     protected int numeroDeUsuarios;
-    protected String diretorioPastaUsers = "C:/Users/João V Nardi/Desktop/Joao/java/DesafioSistemaDeCadastro2/usuarios/";
+    protected String diretorioPastaUsers = "C:/Users/João V Nardi/Desktop/Joao/java/DesafioSistemaDeCadastro/usuarios/";
     List<String> listaBusca = new ArrayList<>();
     File pastaUsers = new File(diretorioPastaUsers); // pasta users
     int contador = 0;
@@ -79,24 +79,16 @@ public class PastaUsuarios {
     public void buscaUsuario() throws FileNotFoundException, IllegalArgumentException {
         busca();
         Scanner busca = new Scanner(System.in);
-            String[] nomes = listaBusca.toArray(new String[0]); // converte lista para array de string
-            String buscado = busca.nextLine(); // input da busca
+        String[] nomes = listaBusca.toArray(new String[0]); // converte lista para array de string
+        String buscado = busca.nextLine(); // input da busca
         if (Stream.of(nomes).noneMatch(f -> f.contains(buscado.trim()))){
             throw new InputMismatchException("Nenhum usuario encontrado.");
         }
-            if (buscado.length() < 2 || buscado.isBlank()) { // possiveis inputs invalidos
-                throw new IllegalArgumentException("Erro: Dados para busca invalidos!");
-            } else {
-                Stream.of(nomes).sorted().filter(f -> f.contains(buscado)).forEach(System.out::println); // filtra a busca
-            }
+        if (buscado.length() < 2 || buscado.isBlank()) { // possiveis inputs invalidos
+            throw new IllegalArgumentException("Erro: Dados para busca invalidos!");
+        } else {
+            Stream.of(nomes).sorted().filter(f -> f.contains(buscado)).forEach(System.out::println); // filtra a busca
         }
-
-
-    public int getNumeroDeUsuarios() {
-        return numeroDeUsuarios;
     }
 
-    public String getDiretorioPastaUsers() {
-        return diretorioPastaUsers;
-    }
 }

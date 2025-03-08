@@ -61,7 +61,7 @@ public class Usuario {
                 throw new IllegalArgumentException("Erro: O email informado ja é cadastrado!");
             } else
 
-                respostasTxt = new File("C:/Users/João V Nardi/Desktop/Joao/java/DesafioSistemaDeCadastro2/usuarios", id + ".txt");
+                respostasTxt = new File("C:/Users/João V Nardi/Desktop/Joao/java/DesafioSistemaDeCadastro/usuarios", id + ".txt");
             //bloco para escrever no txt
             OutputStream os = new FileOutputStream(respostasTxt);
             Writer wr = new OutputStreamWriter(os);
@@ -69,6 +69,7 @@ public class Usuario {
             //
             br.write(listaDeRespostas.toString()); //escreve a lista de reposta no txt
             br.close();
+            System.out.println("Cadastro realizado com sucesso!");
         }
     }
 }

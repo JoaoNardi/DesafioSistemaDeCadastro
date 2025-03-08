@@ -1,10 +1,9 @@
+import javax.swing.*;
 import java.io.*;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 public class ArquivoPerguntas {
-    String caminhoPerguntas = "C:/Users/João V Nardi/Desktop/Joao/java/DesafioSistemaDeCadastro2/perguntas.txt";
+    String caminhoPerguntas = "C:/Users/João V Nardi/Desktop/Joao/java/DesafioSistemaDeCadastro/perguntas.txt";
     List<String> linhasTxt = new ArrayList<>(); // lista para armazenar o que vai ser lido do arquivo
     FileReader arquivoPerguntas = new FileReader(caminhoPerguntas); //txt de perguntas
     Scanner leitorTxt = new Scanner(arquivoPerguntas); // inicializa o scanner que vai ler o txt
@@ -34,8 +33,8 @@ public class ArquivoPerguntas {
         while (leitorTxt.hasNextLine()) { //enquanto tiver linhas para ler
             String[] partes = leitorTxt.nextLine().split(" - ");
             var p = new Pergunta(linhasTxt.size()+1,partes[1].trim());
-                linhasTxt.add(p.toString() + "\n"); // adiconar linha por linha na lista
-            }
+            linhasTxt.add(p.toString() + "\n"); // adiconar linha por linha na lista
+        }
         return linhasTxt; //retorna a lista
     }
 
@@ -53,29 +52,37 @@ public class ArquivoPerguntas {
     }
 
     public void deletaPergunta() throws IOException {
-            converteTxtParaString();
-            if (linhasTxt.size() == 4){throw new IllegalArgumentException("Erro: Nenhuma pergunta cadastrada!");}
-            System.out.println("-------------------------");
-            System.out.println("Deseja apagar qual pergunta?");
+        converteTxtParaString();
+        if (linhasTxt.size() == 4){throw new IllegalArgumentException("Erro: Nenhuma pergunta cadastrada!");}
 
-            for (int i = 4; i < linhasTxt.size(); i++) {
-                System.out.println(linhasTxt.get(i).toString()
-                        .replace("[", "")
-                        .replace("]", "")
-                        .replace(", ", "")
-                        .replace("\n", "")); //arruma esteticamente a lista;
-            }
-            System.out.println("-------------------------");
-            int perguntaDeletavel = leitor.nextInt();
-        if (perguntaDeletavel > linhasTxt.size()) {throw new IndexOutOfBoundsException("Erro: Pergunta ("+  perguntaDeletavel + ") não " + "existe");}
-            if (perguntaDeletavel <= 4) {throw new IllegalArgumentException("                Atenção!!!" + "\n" + "Não é possivel deletar as perguntas padrão");
-            } else
-                linhasTxt.remove(perguntaDeletavel - 1);
+        System.out.println("-------------------------");
+        System.out.println("Deseja apagar qual pergunta?");
+        for (int i = 4; i < linhasTxt.size(); i++) {
+            System.out.println(linhasTxt.get(i).toString()
+                    .replace("[", "")
+                    .replace("]", "")
+                    .replace(", ", "")
+                    .replace("\n", "")); //arruma esteticamente a lista;
+        }
+        System.out.println("-------------------------");
+        int perguntaDeletavel = 0;
+        try {
+            perguntaDeletavel = leitor.nextInt();
+        }catch (InputMismatchException e){
+            throw new InputMismatchException("Erro: digite apenas o digito da pergunta a ser deletado!");
+        }
+        if (perguntaDeletavel > linhasTxt.size()) {
+            throw new IndexOutOfBoundsException("Erro: Pergunta (" + perguntaDeletavel + ") não " + "existe");
+        }
+        if (perguntaDeletavel <= 4) {
+            throw new IllegalArgumentException("                Atenção!!!" + "\n" + "Não é possivel deletar as perguntas padrão");
+        } else
+            linhasTxt.remove(perguntaDeletavel - 1); //deleta a pergunta selecionada
 
-            converteTxtParaString();
-            refresh();
+        converteTxtParaString();
+        refresh();
+    }
 
-}
     public List<String> getLinhasTxt() {
         return linhasTxt;
     }
