@@ -18,7 +18,7 @@
 </p>
 <br>
 <h3> ▶️ Utilizando</h3>
-<p> Para usar a aplicação bastar abrir o repositório em qualquer IDE e iniciar através da função run ou similar. </p>
+<p> Para usar a aplicação bastar abrir o repositório em qualquer IDE com JDK e iniciar através da função run ou similar. </p>
 
 <br>
 <h3>📚 Sobre</h3>
