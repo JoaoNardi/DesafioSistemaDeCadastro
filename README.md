@@ -1,23 +1,23 @@
-<h1 align="center"> Desafio Sitema de Cadastro "2" </h1>
+<h1 align="center"> Desafio Sistema de Cadastro </h1>
+<h3> 📖 Descrição</h3>
+
+<h4> O projeto simula a aplicação de cadastro simples via terminal. </h4> 
+<p>
+  Ao iniciar o código, será exibido um menu oferecendo 6 opções. <br>
+  
+  Funcionalidades do projeto:
+
+- `1 - Cadastrar o usuário`: Exibe no terminal um formulário que está armazenado em um .txt . Ao respondê-lo, será criado um cadastro e as informações serão salvas em um .txt na pasta "Usuários".
+- `2 - Listar todos os usuários cadastrados`: Lista os usuários cadastrados.
+- `3 - Cadastrar nova pergunta no formulário`: Adiciona uma pergunta, reescrevendo o arquivo onde está guardado o formulário.
+- `4 - Deletar pergunta do formulário`: Deleta a pergunta selecionada (apenas as perguntas criadas na funcionalidade 3 podem ser apagadas).
+- `5 - Pesquisar usuário por nome, idade ou e-mail`: A busca será feita nos arquivos cadastrados, e os resultados mais aproximados obtidos serão exibidos em ordem alfabética.
+- `6 - Encerrar aplicação`: Encerra a execução do programa.
+  <br>
+</p>
+
 <h3>📚 Sobre</h3>
 <p> 
-Fiz esse projeto como exercicio do que aprendi nos meus estudos em Java. 
-  <br>
-Projeto proposto pelo @devmagro em seu guia de estudo.
-</p>
-<p></p>
-<p>
-  Coloquei 2 por que esta foi a segunda tentativa de fazer esse projeto. A primeira estava muito mal planejada, classes mal definidas, 
-  codigo poluido a ponto de chegar na metade do projeto e não ser mais possivel prosseguir, achei melhor começar do zero.
-  <br>
-  Não acho que agora esteja perfeito, mas esta bastante funcional, pretendo aprimora-lo mais pra frente conforme vou aprendendo.
-  obs: Quando percebi que precisaria refazer tudo fiquei bastante desanimado, por isso resolvi deixar o "2" para que eu me lembre que 
-  não tem problema recomeçar as vezes.
-</p>
-
- <h2> 📖 Descrição</h2>
-<p>
-  Projeto simula um sistema de cadastro simples, ele le as perguntas com base em um txt e armazena as resposta criando um usuario.
-
-  <br>
+Projeto proposto pelo @devmagro em seu guia de estudo de Java. <br>
+O código ainda contém imperfeições que serão corrigidas futuramente, conforme avanço dos estudos. <br>
 </p>
